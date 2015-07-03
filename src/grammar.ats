@@ -1,6 +1,7 @@
 import RouteRecognizer from 'route-recognizer';
 
 var CHILD_ROUTE_SUFFIX = '/*childRoute';
+var OTHERWISE_REDIRECT_TO_REWRITE_KEY = 'otherwiseRedirectTo';
 
 /*
  * only one of these
@@ -142,6 +143,10 @@ class CanonicalRecognizer {
       return;
     }
 
+    if(mapping.otherwiseRedirectTo){
+          this.rewrites[OTHERWISE_REDIRECT_TO_REWRITE_KEY] = otherwiseRedirectTo;
+    }
+
     // normalize "component" and "components" in config
     if (mapping.component) {
       if (mapping.components) {
@@ -180,6 +185,12 @@ class CanonicalRecognizer {
     if (context) {
       context[0].handler.rewroteUrl = canonicalUrl;
     }
+    else{
+        if(this.rewrites['OTHERWISE_REDIRECT_TO_REWRITE_KEY']){
+         return this.recognize(this.rewrites['OTHERWISE_REDIRECT_TO_REWRITE_KEY'].directTo);
+        }
+      }
+
     return context;
   }
 
