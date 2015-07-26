@@ -6,7 +6,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/angular/router.git"
+    "url": "git://github.com/siddharta1337/router.git"
   },
   "bugs": {
     "url": "https://github.com/angular/router/issues"
