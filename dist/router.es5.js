@@ -1484,12 +1484,21 @@ var Grammar = function Grammar() {
         params: lastParams
       };
       if (lastParams && lastParams.childRoute) {
+
+        console.log("aqui")
         var childUrl = '/' + lastParams.childRoute;
         instruction.canonicalUrl = lastHandler.rewroteUrl.substr(0, lastHandler.rewroteUrl.length - (lastParams.childRoute.length + 1));
         forEach(lastHandler.components, (function(componentName, outletName) {
           instruction.outlets[outletName] = $__0.recognize(childUrl, componentName);
         }));
-        instruction.canonicalUrl += instruction.outlets[Object.keys(instruction.outlets)[0]].canonicalUrl;
+
+        /// HACK BY CSD
+          instruction.canonicalUrl = lastHandler.rewroteUrl;
+          forEach(lastHandler.components, (function(componentName, outletName) {
+            instruction.outlets[outletName] = {outlets: {}};
+          }));
+
+          instruction.canonicalUrl = "/notDefined"//+= instruction.outlets[Object.keys(instruction.outlets)[0]].canonicalUrl;
       } else {
         instruction.canonicalUrl = lastHandler.rewroteUrl;
         forEach(lastHandler.components, (function(componentName, outletName) {

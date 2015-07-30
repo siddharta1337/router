@@ -6,7 +6,7 @@ angular.module('myApp', [
   'myApp.three',
   'myApp.end'
 ]).
-    controller('AppController', ['$router', AppController]).
+    controller('AppController', ['$router',AppController]).
     factory('answers', answersFactory);
 
 function AppController($router) {
@@ -15,9 +15,13 @@ function AppController($router) {
     { path: '/one',    component: 'one' },
     { path: '/two',    component: 'two' },
     { path: '/three',  component: 'three' },
-    { path: '/end',    component: 'end' }
+    { path: '/end',    component: 'end' },
+    { path:'/notDefined', redirectTo: 'one' }
   ]);
+
+
 }
+
 
 
 function answersFactory() {
